@@ -1,13 +1,17 @@
-import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import {login} from '../service/index';
+import React from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
+// import { login } from '../service/index';
+import { useAppDispatch, useAppSelector } from '../redux/hooks/hook';
+import { getUserInfoAysnc } from '../redux/reducers/userReducer';
 
 const Login = () => {
-
+  const dispatch =useAppDispatch()
   const hanldeLogin = () => {
-    login({username: 'admin', password: '123456'});
-  }
-
+    // login({username: 'admin', password: '123456'});
+    dispatch(getUserInfoAysnc({username: 'admin', password: '123456'}));
+  } 
+  // 获取dispath用于向store中派发方法
+  console.log(useAppSelector(state =>state));
   return (
     <div>
       <Form

@@ -8,7 +8,7 @@ import {
 
 
 
-const getUserInfo = createAsyncThunk(
+export const getUserInfoAysnc = createAsyncThunk(
   'getUserInfo/getUserInfoStatus',
   async (userInfo: loginType, thunkAPI) => {
     const response = await login(userInfo);
@@ -19,13 +19,16 @@ const getUserInfo = createAsyncThunk(
 let initialState = {
   data: {}
 }
-
 const usersSlice = createSlice({
   name: 'getUserInfo',
   initialState,
-  reducers: {},
+  reducers: {
+    setUserInfo: (state) => {
+      console.log(state);
+    }
+  },
   extraReducers: (builder) => {
-    builder.addCase(getUserInfo.fulfilled, (state, action) => {
+    builder.addCase(getUserInfoAysnc.fulfilled, (state, action) => {
         state.data = action.payload;
     });
   },
