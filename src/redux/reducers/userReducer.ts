@@ -4,6 +4,7 @@ import {
 } from '../../service/index'
 import {
   loginType,
+  userInfo
 } from '../../types'
 
 
@@ -30,6 +31,12 @@ const usersSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserInfoAysnc.fulfilled, (state, action) => {
         state.data = action.payload;
+        let payload = action.payload as userInfo;
+        if (payload.data) {
+          let myLocalStorage  = window.localStorage;
+          myLocalStorage.setItem('userInfo', JSON.stringify(payload.data));
+        }
+       
     });
   },
 })
